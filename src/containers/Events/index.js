@@ -16,7 +16,7 @@ const EventList = () => {
 
   const filteredEvents = ((!type ? data?.events : data?.events) || [])
     .filter((event) => {
-      if (type === null) {
+      if (type === null || !type) {
         return event;
       }
       return event.type === type;
