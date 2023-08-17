@@ -14,15 +14,7 @@ import { useData } from "../../contexts/DataContext";
 import ModalEvent from "../../containers/ModalEvent";
 
 const Page = () => {
-  const { data } = useData();
-
-  const filteredEvent = data?.events
-    .sort((evtA, evtB) => (new Date(evtA.date) < new Date(evtB.date) ? -1 : 1))
-    .slice();
-
-  const latestEvent = filteredEvent
-    ? filteredEvent[filteredEvent.length - 1]
-    : null;
+  const { last } = useData();
 
   return (
     <>
@@ -33,7 +25,11 @@ const Page = () => {
         <section className="SliderContainer">
           <Slider />
         </section>
-        <section className="ServicesContainer" id="nos-services">
+        <section
+          className="ServicesContainer"
+          id="nos-services"
+          data-testid="my-test-id"
+        >
           <h2 className="Title">Nos services</h2>
           <p>Nous organisons des événements sur mesure partout dans le monde</p>
           <div className="ListContainer">
@@ -124,14 +120,14 @@ const Page = () => {
       <footer className="row">
         <div className="col presta">
           <h3>Notre derniére prestation</h3>
-          {latestEvent ? (
-            <Modal Content={<ModalEvent event={latestEvent} />}>
+          {last ? (
+            <Modal Content={<ModalEvent event={last} />}>
               {({ setIsOpened }) => (
                 <EventCard
                   onClick={() => setIsOpened(true)}
-                  imageSrc={latestEvent?.cover}
-                  title={latestEvent?.title}
-                  date={new Date(latestEvent?.date)}
+                  imageSrc={last?.cover}
+                  title={last?.title}
+                  date={new Date(last?.date)}
                   small
                   label="boom"
                 />

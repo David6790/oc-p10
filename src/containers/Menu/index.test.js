@@ -23,4 +23,17 @@ describe("When Menu is created", () => {
       expect(window.document.location.hash).toEqual("#contact");
     });
   });
+  describe("and a click is triggered on nos services button", () => {
+    it("document location  href change", async () => {
+      render(<Menu />);
+      fireEvent(
+        await screen.findByText("Nos services"),
+        new MouseEvent("click", {
+          cancelable: true,
+          bubbles: true,
+        })
+      );
+      expect(window.document.location.hash).toEqual("#nos-services");
+    });
+  });
 });
