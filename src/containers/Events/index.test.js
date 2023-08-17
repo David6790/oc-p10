@@ -45,19 +45,17 @@ describe("When Events is created", () => {
         <Events />
       </DataProvider>
     );
-    screen.queryAllByText("avril");
+    await screen.findAllByText("avril");
   });
   describe("and an error occured", () => {
     it("an error message is displayed", async () => {
-      api.loadData = jest.fn().mockRejectedValue();
+      api.loadData = jest.fn().mockRejectedValue(data);
       render(
         <DataProvider>
           <Events />
         </DataProvider>
       );
-      setTimeout(() => {
-        expect(screen.findByText("An error occured")).toBeInTheDocument();
-      }, 1000);
+      expect(await screen.findByText("An error occured")).toBeInTheDocument();
     });
   });
   describe("and we select a category", () => {
