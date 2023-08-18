@@ -28,12 +28,15 @@ describe("When Form is created", () => {
 });
 
 describe("When a page is created", () => {
-  it("a list of events is displayed", async () => {});
+  it("a list of events is displayed", () => {
+    render(<Page />);
+    const divElement = screen.getByTestId("eventList");
+    expect(divElement).toBeDefined();
+  });
   it("a list a people is displayed", () => {
     render(<Page />);
     const peopleId = screen.getAllByTestId("peopleId");
     expect(peopleId).toHaveLength(6);
-    // to implement
   });
   it("a footer is displayed", async () => {
     render(<Page />);
@@ -41,6 +44,10 @@ describe("When a page is created", () => {
     expect(footerTitle).toHaveTextContent("Contactez-nous");
   });
   it("an event card, with the last event, is displayed", async () => {
-    // to implement
+    render(<Page />);
+    const lastEventHeading = screen.getByRole("heading", {
+      name: "Notre derniére prestation",
+    });
+    expect(lastEventHeading).toBeInTheDocument();
   });
 });
