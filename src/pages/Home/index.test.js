@@ -26,28 +26,30 @@ describe("When Form is created", () => {
     });
   });
 });
+// test d'intégration implementé pour verifier le bon deroulement du chargement de la page d'acceuil.
 
 describe("When a page is created", () => {
   it("a list of events is displayed", () => {
     render(<Page />);
     const divElement = screen.getByTestId("eventList");
-    expect(divElement).toBeDefined();
+    expect(divElement).toBeInTheDocument();
   });
   it("a list a people is displayed", () => {
     render(<Page />);
     const peopleId = screen.getAllByTestId("peopleId");
     expect(peopleId).toHaveLength(6);
   });
-  it("a footer is displayed", async () => {
+  it("a footer is displayed", () => {
     render(<Page />);
-    const footerTitle = await screen.findByText("Contactez-nous");
-    expect(footerTitle).toHaveTextContent("Contactez-nous");
+    const footerTitle = screen.getByText("Contactez-nous");
+    expect(footerTitle).toBeDefined();
   });
-  it("an event card, with the last event, is displayed", async () => {
+  it("an event card, with the last event, is displayed", () => {
     render(<Page />);
     const lastEventHeading = screen.getByRole("heading", {
       name: "Notre derniére prestation",
     });
     expect(lastEventHeading).toBeInTheDocument();
+    // check quel assertion utilisé 
   });
 });
